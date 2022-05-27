@@ -18,41 +18,49 @@ Quando l’utente clicca su ogni cella, la cella cliccata si colora di azzurro.
 */
 
 
-/* 
+
 //creo una variabile per il pulsante
 const submitButton = document.getElementById("submitButton");
-// creo una variabile che conterrà il valore scelto dall'utente tramite la select
-const selectValue= document.getElementById("difficultLevels");
+const gridContainer = document.getElementById("container-grid")
 
 //creo l'evento click sul pulsante
-submitButton.addEventListener("click", function(){
-    //
+submitButton.addEventListener("click", function () {
+    //creiamo una funzione che svuoti le celle
+    resetContainer(gridContainer);
+    // creo una variabile che conterrà il valore scelto dall'utente tramite la select
+    const select = document.getElementById("difficultLevels");
+    const selectValue = select.value;
+    let numCell;
+
+    if (selectValue == 1) {
+        numCell = 10;
+    } else if (selectValue == 2) {
+        numCell = 9;
+    } else if (selectValue == 3) {
+        numCell = 7;
+    }
+    // creo variabile per il contenitore della griglia
+    gridContainer.style.width = `calc(var(--w-cell) * ${numCell})`;
+    //con un ciclo for creo un quadrato generando ad ogni ciclo un div
+    for (let i = 1; i <= (numCell * numCell); i++) {
+        //creo un elemento di tipo div che sarà la singola cella
+        const cell = document.createElement("div");
+        //Do uno stile al div con le classi precedentemente dichiarate nel file css
+        cell.classList.add("cell");
+        //inserisco in ogni cella il valore dell'indice i
+        cell.append(i.toString());
+
+        //appendo il div al contenitore della griglia
+        gridContainer.append(cell)
+        cell.addEventListener("click", function () {
+            this.classList.add("clicked");
+        })
+    }
 })
 
+//funzione reset
 
-// */
+const resetContainer = (gridContainer) => gridContainer.innerHTML= "";
 
-// creo variabile per il contenitore della griglia
-const gridContainer = document.getElementById("container-grid");
-
-gridContainer.style.width = 'calc(var(--w-cell) * 10)';
-//con un ciclo for creo un quadrato generando ad ogni ciclo un div
-for (let i = 1; i <= 100; i++) {
-    //creo un elemento di tipo div che sarà la singola cella
-    const cell = document.createElement("div");
-    //Do uno stile al div con le classi precedentemente dichiarate nel file css
-    cell.classList.add("cell");
-    //inserisco in ogni cella il valore dell'indice i
-    cell.append(i.toString());
-    //appendo il div al contenitore della griglia
-    
-
-
-
-    gridContainer.append(cell)
-    cell.addEventListener("click", function () {
-    this.classList.add("clicked");
-})
-}   
 
 
