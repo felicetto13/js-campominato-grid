@@ -1,0 +1,21 @@
+:root {
+    --w-cell: 100px;
+}
+.container-grid {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container-grid .cell {
+    width: var(--w-cell);
+    height: var(--w-cell);
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clicked {
+    background-color: var(--bs-info);
+}
